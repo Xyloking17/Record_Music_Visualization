@@ -21,7 +21,7 @@ function setup() {
 	angleMode(DEGREES);
 	imageMode(CENTER);
 	textAlign(CENTER, CENTER);
-	textSize((width*height)/19200);
+
 
 
 	durBar = new DurationBar(width, height);
@@ -46,6 +46,7 @@ function showText() {
 		stroke(0);
 		strokeWeight(2);
 		fill(255);
+		textSize((width*height)/19200);
 		text("Click Anywhere To Play", 0, 0);
 }
 
