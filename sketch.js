@@ -29,6 +29,9 @@ function setup() {
 	amp = new p5.Amplitude();
 }
 
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
 ////////////////////////////////////////////////////////////////////////////////
 function mousePressed() {
 	if(!mySong.isPlaying() && mySong.isLoaded()){
