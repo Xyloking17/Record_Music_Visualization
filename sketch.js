@@ -21,7 +21,7 @@ function setup() {
 	angleMode(DEGREES);
 	imageMode(CENTER);
 	textAlign(CENTER, CENTER);
-	textSize(120);
+	textSize((width*height)/19200);
 
 
 	durBar = new DurationBar(width, height);
@@ -41,7 +41,7 @@ function mousePressed() {
 ////////////////////////////////////////////////////////////////////////////////
 function showText() {
 		stroke(0);
-		strokeWeight(6);
+		strokeWeight(2);
 		fill(255);
 		text("Click Anywhere To Play", 0, 0);
 }
@@ -65,7 +65,9 @@ function draw() {
 
 	//music control
 	let vol = amp.getLevel();
-	len = map(vol, 0, 0.3, (height/2) - 50, height/2);
+	width > height ?
+	len = map(vol, 0, 0.3, (height/2) - 50, height/2) :
+	len = map(vol, 0, 0.3, (width/2) - 50, width/2);
 
 
 	//color wheel
