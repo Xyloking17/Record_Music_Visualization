@@ -8,26 +8,28 @@ let amp;
 let durBar;
 let record;
 
+////////////////////////////////////////////////////////////////////////////////
 function preload() {
 	mySong = loadSound('song.mp3');
 	myImage = loadImage('record.png');
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	colorMode(HSB, 255);
 	angleMode(DEGREES);
 	imageMode(CENTER);
+	textAlign(CENTER, CENTER);
+	textSize(120);
 
 
 	durBar = new DurationBar(width, height);
 	record = new Record();
 	amp = new p5.Amplitude();
-
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 function mousePressed() {
 	if(!mySong.isPlaying() && mySong.isLoaded()){
 		mySong.loop();
@@ -36,7 +38,15 @@ function mousePressed() {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+function showText() {
+		stroke(0);
+		strokeWeight(6);
+		fill(255);
+		text("Click Anywhere To Play", 0, 0);
+}
 
+////////////////////////////////////////////////////////////////////////////////
 function draw() {
 	background(51);
 	strokeWeight(10);
@@ -65,6 +75,7 @@ function draw() {
  	rotate(-ang);
 	record.showImage(myImage, len);
 
-	//only rotates record if music is playing
-	mySong.isPlaying() ? ang += 1.5 : null;
+	//if playing, rotate record, otherwise show text
+	mySong.isPlaying() ? ang += 1.5 : showText();
+
 }

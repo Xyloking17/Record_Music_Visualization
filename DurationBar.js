@@ -10,6 +10,7 @@ function DurationBar(w, h) {
   };
 
   this.update = function(song) {
+    
     this.x = map(song.duration() - song.currentTime(), song.duration(), 0, 0, this.w);
   };
 }
