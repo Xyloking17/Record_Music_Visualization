@@ -58,6 +58,7 @@ function showText(words) {
 function changeSong(file) {
 	if(file.type === 'audio'){
 		mySong.stop();
+		durBar.x = 0;
 		mySong = loadSound(file, success, null, load());
 	} else {
 		display = 'Incorrect filetype';
