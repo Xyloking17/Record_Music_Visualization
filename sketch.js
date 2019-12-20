@@ -4,9 +4,11 @@ let mySong;
 let myImage;
 let amp;
 
+let display = "Click Anywhere to Play \n or Drop a New Audio File";
 
 let durBar;
 let record;
+let canvas;
 
 ////////////////////////////////////////////////////////////////////////////////
 function preload() {
@@ -16,7 +18,9 @@ function preload() {
 
 ////////////////////////////////////////////////////////////////////////////////
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	canvas = createCanvas(windowWidth, windowHeight);
+	canvas.drop(changeSong)
+
 	colorMode(HSB, 255);
 	angleMode(DEGREES);
 	imageMode(CENTER);
@@ -42,16 +46,29 @@ function mousePressed() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-function showText() {
+function showText(words) {
 		stroke(0);
 		strokeWeight(2);
 		fill(255);
 		textSize((width*height)/19200);
-		text("Click Anywhere To Play", 0, 0);
+		text(words, 0, 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+function changeSong(file) {
+	if(file.type === 'audio'){
+		mySong.stop();
+		mySong = loadSound(file, success, null, load());
+	} else {
+		display = 'Incorrect filetype';
+	}
+}
+
+function success() { display = "Click Anywhere to Play \n or Drop a New Audio File"; }
+function load() { display = "Loading..."; }
+////////////////////////////////////////////////////////////////////////////////
 function draw() {
+
 	background(51);
 	strokeWeight(10);
 	stroke(255);
@@ -82,6 +99,6 @@ function draw() {
 	record.showImage(myImage, len);
 
 	//if playing, rotate record, otherwise show text
-	mySong.isPlaying() ? ang += 1.5 : showText();
+	mySong.isPlaying() ? ang += 1.5 : showText(display);
 
 }
